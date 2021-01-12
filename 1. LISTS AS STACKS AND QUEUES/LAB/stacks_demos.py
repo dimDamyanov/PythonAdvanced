@@ -14,4 +14,5 @@ class Stack:
     def len(self):
         return len(self.internal_stack)
 
+
 stack1 = Stack
