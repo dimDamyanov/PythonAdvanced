@@ -1,19 +1,16 @@
-from datetime import datetime, timedelta
 from collections import deque
+from datetime import datetime, timedelta
 
 END_COMMAND = 'End'
 
-robots = {}
-line = input().split(';')
+data = input().split(';')
+time = datetime.strptime(input(), '%H:%M:%S')
+robots = []
 
-for entry in line:
-    tokens = entry.split('-')
-    robot = tokens[0]
-    processing_time = int(tokens[1])
-    busy_time =
-    robots[robot] = processing_time
-
-current_time = datetime.strptime(input(), '%H:%M:%S')
+for el in data:
+    robot_data = el.split('-')
+    robot = {'name': robot_data[0], 'processing_time': int(robot_data[1]), 'available_at': time}
+    robots.append(robot)
 
 products = deque()
 while True:
@@ -23,4 +20,16 @@ while True:
     else:
         products.append(command)
 
+time += timedelta(seconds=1)
 while products:
+    current_product = products.popleft()
+    flag = False
+    for robot in robots:
+        if robot['available_at'] <= time:
+            robot['available_at'] = time + timedelta(seconds=robot['processing_time'])
+            print(f'{robot["name"]} - {current_product} [{time.strftime("%H:%M:%S")}]')
+            flag = True
+            break
+    if not flag:
+        products.append(current_product)
+    time += timedelta(seconds=1)
