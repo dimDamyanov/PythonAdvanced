@@ -30,6 +30,8 @@ class CustomSet:
             self.values[index] = []
         if value not in self.values[index]:
             self.values[index].append(value)
+        self.count += 1
+        flag = self.execute_resize_check()
         if self.execute_resize_check():
             self.resize()
 
@@ -71,16 +73,5 @@ ss.add(3)
 ss.add(2)
 ss.add(1)
 ss.add(0)
-ss.add(-1)
-ss.add(-2)
-ss.add(-3)
-ss.add(-4)
-ss.add(-5)
-ss.add(-6)
-ss.add(-7)
-ss.add(-8)
-ss.add('add')
-ss.add('remove')
-ss.add('take')
-ss.add('peek')
+
 print(ss)
