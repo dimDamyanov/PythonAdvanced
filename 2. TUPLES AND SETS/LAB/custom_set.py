@@ -73,5 +73,6 @@ ss.add(3)
 ss.add(2)
 ss.add(1)
 ss.add(0)
-
+print(ss)
+ss.remove(0)
 print(ss)
