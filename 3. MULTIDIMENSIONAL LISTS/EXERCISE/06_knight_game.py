@@ -1,28 +1,28 @@
-def vulnerable_positions(grid, y: int, x: int):
-    vulnerable = [(y-2, x+1), (y-1, x+2), (y+1, x+2), (y+2, x+1), (y+2, x-1), (y+1, x-2), (y-1, x-2), (y+2, x-1)]
-    count = 0
-    for r, c in vulnerable:
-        if 0 <= r < n and 0 <= c < n:
-            if grid[r][c] == 'K':
-                count += 1
-    return count
+def validate_pos(matrix: list, pos: tuple):
+    return 0 <= pos[0] < len(matrix) and 0 <= pos[1] < len(matrix)
+
+
+def get_vulnerable(matrix: list, r: int, c: int):
+    vulnerable = {(r - 2, c + 1), (r - 1, c + 2), (r + 1, c + 2), (r + 2, c + 1), (r + 2, c - 1), (r + 1, c - 2),
+                  (r - 1, c - 2), (r - 2, c - 1)}
+    return set(pos for pos in vulnerable if validate_pos(matrix, pos) and matrix[pos[0]][pos[1]] == 'K')
 
 
 n = int(input())
-matrix = [[ch for ch in input()] for _ in range(n)]
-knights = dict()
+board = [[ch for ch in input()] for _ in range(n)]
+knights = {}
 for i in range(n):
     for j in range(n):
-        if matrix[i][j] == 'K':
-            knights[i, j] = vulnerable_positions(matrix, i, j)
-knights = sorted(knights.items(), key=lambda x: -x[1])
-print(knights)
-
-for row, col, _ in knights:
-    matrix[row[0]][col[1]] = '0'
-    knights = dict()
-    for i in range(n):
-        for j in range(n):
-            if matrix[i][j] == 'K':
-                knights[i, j] = vulnerable_positions(matrix, i, j)
-
+        if board[i][j] == 'K':
+            knights[i, j] = get_vulnerable(board, i, j)
+knights = {pos: value for pos, value in knights.items() if len(value)}
+n = 0
+while knights:
+    knight = sorted(knights.items(), key=lambda x: len(x[1]), reverse=True)[0][0]
+    v = knights.pop(knight)
+    n += 1
+    for p in v:
+        if p in knights:
+            knights[p].remove(knight)
+    knights = {pos: value for pos, value in knights.items() if len(value)}
+print(n)
