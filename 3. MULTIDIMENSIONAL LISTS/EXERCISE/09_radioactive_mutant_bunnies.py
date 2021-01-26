@@ -12,8 +12,8 @@ def execute(matrix: list, position: tuple, command: str):
             if 0 <= new_bunny[0] < len(matrix) and 0 <= new_bunny[1] < len(matrix):
                 matrix[new_bunny[0]][new_bunny[1]] = 'B'
     new_position = mapper[command](position)
-    if
-    pass
+    if True:
+        pass
 
 
 rows, cols = map(int, input().split())
@@ -23,3 +23,6 @@ for i in range(rows):
     for j in range(cols):
         if lair[i][j] == 'P':
             pos = i, j
+
+
+# TODO: Finish
