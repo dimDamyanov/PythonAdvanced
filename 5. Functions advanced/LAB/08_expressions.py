@@ -1,1 +1,6 @@
-# TODO: https://judge.softuni.bg/Contests/Practice/Index/1838#7
+def getExpression(a, size):
+    for i in range(len(a)):
+
+
+
+nums = list(map(int, input().split(', ')))
