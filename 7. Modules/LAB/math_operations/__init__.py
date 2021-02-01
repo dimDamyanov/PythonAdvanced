@@ -16,5 +16,5 @@ def calculate_expression(expression):
     elif operator == '^':
         result = power(x, y)
     else:
-        raise Exception(f'Invalid operator {operator}')
+        raise Exception(f'Invalid operator \'{operator}\'')
     return f'{result:.2f}'
