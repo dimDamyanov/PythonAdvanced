@@ -15,7 +15,6 @@ def is_available(pos):
 
 
 def play_turn():
-    pass
 
 
 def play():
